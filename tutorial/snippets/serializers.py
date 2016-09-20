@@ -6,13 +6,13 @@ from django.contrib.auth.models import User
 class SnippetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Snippet
-        fields = ('id', 'title', 'code', 'linenos', 'language', 'style','owner')
         owner = serializers.ReadOnlyField(source='owner.username')
+        fields = ('id', 'title', 'code', 'linenos', 'language', 'style','owner')
 
 
-class UserSerializer(serializers.ModelSerializer)
+class UserSerializer(serializers.ModelSerializer):
 	snippets = serializers.PrimaryKeyRelatedField(many=True, queryset=Snippet.objects.all())
 
 	class Meta:
 		model = User
-		fields('id','username','snippets')
+		fields =('id','username','snippets')
